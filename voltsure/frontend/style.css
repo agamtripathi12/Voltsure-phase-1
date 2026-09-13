@@ -1,0 +1,817 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: #f4f6f8;
+    color: #17202a;
+}
+
+button {
+    font: inherit;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    width: 250px;
+    background: #111827;
+    color: white;
+    padding: 28px 18px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px 35px;
+}
+
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    background: #ffffff;
+    color: #111827;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.brand h1 {
+    font-size: 19px;
+    letter-spacing: -0.5px;
+}
+
+.brand p {
+    color: #9ca3af;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.nav-item {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    text-align: left;
+    padding: 13px 12px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.nav-item span {
+    margin-right: 10px;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: #1f2937;
+    color: white;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.system-status {
+    border-top: 1px solid #263142;
+    padding: 20px 8px 5px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+.system-status strong {
+    display: block;
+    font-size: 12px;
+}
+
+.system-status small {
+    color: #9ca3af;
+    font-size: 10px;
+}
+
+/* ================= MAIN ================= */
+
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 30px 38px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    color: #7b8794;
+    letter-spacing: 1.2px;
+    margin-bottom: 6px;
+}
+
+.topbar h2 {
+    font-size: 27px;
+    letter-spacing: -0.8px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.live-indicator {
+    background: white;
+    border: 1px solid #e2e7ec;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.live-indicator span {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    margin-right: 6px;
+}
+
+.battery-id {
+    background: #111827;
+    color: white;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* ================= METRICS ================= */
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.metric-card,
+.panel {
+    background: white;
+    border: 1px solid #e4e8ed;
+    border-radius: 13px;
+}
+
+.metric-card {
+    padding: 20px;
+}
+
+.metric-top {
+    display: flex;
+    justify-content: space-between;
+    color: #7b8794;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.metric-icon {
+    font-size: 16px;
+}
+
+.metric-value {
+    margin-top: 18px;
+    font-size: 31px;
+    font-weight: 750;
+    letter-spacing: -1.2px;
+}
+
+.metric-value small {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.metric-description {
+    margin-top: 6px;
+    color: #9aa4af;
+    font-size: 10px;
+}
+
+.progress {
+    height: 5px;
+    background: #edf0f2;
+    border-radius: 10px;
+    margin-top: 18px;
+    overflow: hidden;
+}
+
+#soc-bar {
+    height: 100%;
+    width: 0%;
+    background: #17202a;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+/* ================= PANELS ================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.65fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.panel {
+    padding: 21px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.panel-header h3 {
+    font-size: 16px;
+    letter-spacing: -0.3px;
+}
+
+.connection {
+    font-size: 10px;
+    color: #697586;
+}
+
+.connection span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+/* ================= CHART ================= */
+
+.chart-container {
+    margin-top: 22px;
+}
+
+.chart-placeholder {
+    height: 190px;
+    border: 1px solid #edf0f3;
+    border-radius: 9px;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(#f0f2f4 1px, transparent 1px),
+        linear-gradient(90deg, #f0f2f4 1px, transparent 1px);
+    background-size: 50px 38px;
+}
+
+.chart-line {
+    position: absolute;
+    height: 2px;
+    width: 80%;
+    left: 10%;
+    transform-origin: left center;
+    background: #17202a;
+}
+
+.line-one {
+    top: 55%;
+    transform: rotate(-7deg);
+}
+
+.line-two {
+    top: 47%;
+    transform: rotate(4deg);
+}
+
+.line-three {
+    top: 62%;
+    transform: rotate(-3deg);
+}
+
+.chart-message {
+    position: absolute;
+    left: 20px;
+    bottom: 15px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.chart-message small {
+    display: block;
+    margin-top: 3px;
+    color: #9aa4af;
+    font-weight: 400;
+}
+
+.telemetry {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.telemetry div {
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.telemetry span {
+    display: block;
+    color: #8994a0;
+    font-size: 9px;
+    margin-bottom: 5px;
+}
+
+.telemetry strong {
+    font-size: 13px;
+}
+
+/* ================= RISK ================= */
+
+.risk-display {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin: 25px 0;
+}
+
+.risk-circle {
+    width: 115px;
+    height: 115px;
+    border-radius: 50%;
+    border: 8px solid #e7eaed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.risk-circle span {
+    font-size: 29px;
+    font-weight: 750;
+}
+
+.risk-circle small {
+    font-size: 8px;
+    color: #8994a0;
+}
+
+.risk-badge,
+.passport-status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: #eef8f1;
+    color: #248044;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.risk-info h4 {
+    margin-top: 9px;
+    font-size: 14px;
+}
+
+.risk-info p {
+    color: #8994a0;
+    font-size: 10px;
+    margin-top: 5px;
+    line-height: 1.5;
+}
+
+.risk-footer {
+    border-top: 1px solid #edf0f3;
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    color: #8994a0;
+    font-size: 9px;
+}
+
+.risk-footer strong {
+    color: #248044;
+}
+
+/* ================= ALERTS ================= */
+
+.alert-count {
+    min-width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #f1f3f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.alerts-container {
+    margin-top: 18px;
+}
+
+.empty-alert {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8faf9;
+    border: 1px solid #edf1ee;
+    padding: 13px;
+    border-radius: 9px;
+}
+
+.empty-alert > div:first-child {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #e9f7ed;
+    color: #248044;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+
+.empty-alert strong {
+    font-size: 11px;
+}
+
+.empty-alert p {
+    font-size: 9px;
+    color: #8994a0;
+    margin-top: 3px;
+}
+
+/* ================= PASSPORT ================= */
+
+.passport-content {
+    margin-top: 18px;
+}
+
+.passport-id {
+    background: #111827;
+    color: white;
+    padding: 15px;
+    border-radius: 9px;
+}
+
+.passport-id span {
+    display: block;
+    font-size: 8px;
+    color: #9ca3af;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.passport-id strong {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.passport-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 15px;
+}
+
+.passport-details span {
+    display: block;
+    font-size: 9px;
+    color: #8994a0;
+    margin-bottom: 4px;
+}
+
+.passport-details strong {
+    font-size: 10px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    color: #9aa4af;
+    font-size: 9px;
+    padding: 20px 3px 5px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+
+    .metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid,
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .sidebar {
+        width: 70px;
+        padding: 20px 10px;
+    }
+
+    .brand div:last-child,
+    .nav-item:not(.active),
+    .system-status div {
+        display: none;
+    }
+
+    .brand {
+        justify-content: center;
+        padding-bottom: 30px;
+    }
+
+    .nav-item {
+        text-align: center;
+    }
+
+    .nav-item span {
+        margin: 0;
+    }
+
+    .main {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+        padding: 20px;
+    }
+
+    .header-right {
+        display: none;
+    }
+
+    .metrics {
+        grid-template-columns: 1fr;
+    }
+}
+/* ================= BATTERY MONITOR PAGE ================= */
+
+.hidden-page {
+    display: none;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.page-subtitle {
+    color: #8994a0;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.monitor-live {
+    background: white;
+    border: 1px solid #e4e8ed;
+    border-radius: 20px;
+    padding: 9px 13px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.monitor-live span {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    margin-right: 6px;
+}
+
+.monitor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.monitor-card {
+    background: white;
+    border: 1px solid #e4e8ed;
+    border-radius: 13px;
+    padding: 22px;
+}
+
+.monitor-card > span {
+    display: block;
+    color: #7b8794;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.monitor-card strong {
+    display: block;
+    margin-top: 15px;
+    font-size: 29px;
+    letter-spacing: -1px;
+}
+
+.monitor-card small {
+    display: block;
+    color: #9aa4af;
+    font-size: 9px;
+    margin-top: 6px;
+}
+
+.monitor-condition {
+    margin-bottom: 18px;
+}
+
+.condition-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 22px;
+}
+
+.condition-grid div {
+    background: #f8f9fa;
+    border-radius: 9px;
+    padding: 15px;
+}
+
+.condition-grid span {
+    display: block;
+    color: #8994a0;
+    font-size: 9px;
+    margin-bottom: 7px;
+}
+
+.condition-grid strong {
+    font-size: 13px;
+}
+
+.monitor-alerts {
+    margin-bottom: 20px;
+}
+
+#monitor-alerts-container {
+    margin-top: 18px;
+}
+
+
+/* Responsive Monitor */
+
+@media (max-width: 900px) {
+
+    .monitor-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .monitor-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .condition-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-heading {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+/* ================= ANALYTICS PAGE ================= */
+
+.analytics-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.analytics-card {
+    background: white;
+    border: 1px solid #e4e8ed;
+    border-radius: 13px;
+    padding: 21px;
+}
+
+.analytics-card span {
+    display: block;
+    color: #7b8794;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.analytics-card strong {
+    display: block;
+    margin-top: 14px;
+    font-size: 29px;
+}
+
+.analytics-card small {
+    display: block;
+    color: #9aa4af;
+    font-size: 9px;
+    margin-top: 6px;
+}
+
+.analytics-panel {
+    margin-bottom: 18px;
+}
+
+.analytics-status {
+    padding: 6px 9px;
+    border-radius: 6px;
+    background: #f1f3f5;
+    color: #68727d;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.analytics-chart {
+    height: 280px;
+    margin-top: 20px;
+    position: relative;
+    border: 1px solid #edf0f3;
+    border-radius: 9px;
+    padding: 10px;
+}
+
+.analytics-chart canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.small-chart {
+    height: 220px;
+}
+
+.analytics-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+@media (max-width: 850px) {
+
+    .analytics-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-two-column {
+        grid-template-columns: 1fr;
+    }
+}

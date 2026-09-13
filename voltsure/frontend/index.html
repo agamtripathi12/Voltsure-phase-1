@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VoltSure | Battery Intelligence</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-mark">V</div>
+
+                <div>
+                    <h1>VoltSure</h1>
+                    <p>Battery Intelligence</p>
+                </div>
+            </div>
+
+            <nav>
+                <button class="nav-item active"onclick="showPage('overview')">
+                    <span>▣</span>
+                    Overview
+                </button>
+
+                <button class="nav-item"onclick="showPage('monitor')">
+                    <span>◉</span>
+                    Battery Monitor
+                </button>
+
+                <button class="nav-item"onclick="showPage('analytics')">
+                    <span>⌁</span>
+                    Analytics
+                </button>
+
+                <button class="nav-item"onclick="showPage('passport')">
+                    <span>▤</span>
+                    Battery Passport
+                </button>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="system-status">
+                    <span class="status-dot"></span>
+
+                    <div>
+                        <strong>System Online</strong>
+                        <small>VoltSure API connected</small>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- ================= BATTERY MONITOR PAGE ================= -->
+
+<section id="monitor-page" class="hidden-page">
+
+    <div class="page-heading">
+        <div>
+            <p class="eyebrow">LIVE BATTERY TELEMETRY</p>
+            <h2>Battery Monitor</h2>
+            <p class="page-subtitle">
+                Real-time monitoring of battery operating parameters.
+            </p>
+        </div>
+
+        <div class="monitor-live">
+            <span></span>
+            LIVE MONITORING
+        </div>
+    </div>
+
+
+    <!-- Monitor Metrics -->
+
+    <div class="monitor-grid">
+
+        <div class="monitor-card">
+            <span>Pack Voltage</span>
+            <strong><span id="monitor-voltage">--</span> V</strong>
+            <small>Battery pack voltage</small>
+        </div>
+
+        <div class="monitor-card">
+            <span>Current</span>
+            <strong><span id="monitor-current">--</span> A</strong>
+            <small>Real-time current flow</small>
+        </div>
+
+        <div class="monitor-card">
+            <span>Temperature</span>
+            <strong><span id="monitor-temperature">--</span> °C</strong>
+            <small>Battery thermal condition</small>
+        </div>
+
+        <div class="monitor-card">
+            <span>State of Charge</span>
+            <strong><span id="monitor-soc">--</span>%</strong>
+            <small>Available energy</small>
+        </div>
+
+        <div class="monitor-card">
+            <span>State of Health</span>
+            <strong><span id="monitor-soh">--</span>%</strong>
+            <small>Battery health estimate</small>
+        </div>
+
+        <div class="monitor-card">
+            <span>Cycle Count</span>
+            <strong><span id="monitor-cycles">--</span></strong>
+            <small>Total charge cycles</small>
+        </div>
+
+    </div>
+
+
+    <!-- Battery Condition -->
+
+    <div class="panel monitor-condition">
+
+        <div class="panel-header">
+
+            <div>
+                <p class="eyebrow">SYSTEM DIAGNOSTICS</p>
+                <h3>Battery Condition</h3>
+            </div>
+
+            <span id="monitor-risk" class="risk-badge">
+                LOW RISK
+            </span>
+
+        </div>
+
+
+        <div class="condition-grid">
+
+            <div>
+                <span>Health Status</span>
+                <strong id="monitor-health">
+                    HEALTHY
+                </strong>
+            </div>
+
+            <div>
+                <span>Risk Score</span>
+                <strong id="monitor-risk-score">
+                    0
+                </strong>
+            </div>
+
+            <div>
+                <span>System Status</span>
+                <strong>ONLINE</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Alerts -->
+
+    <div class="panel monitor-alerts">
+
+        <div class="panel-header">
+
+            <div>
+                <p class="eyebrow">SAFETY MONITORING</p>
+                <h3>Active Battery Alerts</h3>
+            </div>
+
+        </div>
+
+        <div id="monitor-alerts-container">
+
+            <div class="empty-alert">
+
+                <div>✓</div>
+
+                <div>
+                    <strong>No active alerts</strong>
+
+                    <p>
+                        Battery operating within normal parameters.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+            <!-- Header -->
+            <header class="topbar">
+
+                <div>
+                    <p class="eyebrow">BATTERY INTELLIGENCE PLATFORM</p>
+                    <h2>Battery Overview</h2>
+                </div>
+
+                <div class="header-right">
+
+                    <div class="live-indicator">
+                        <span></span>
+                        LIVE
+                    </div>
+
+                    <div class="battery-id">
+                        VS-BAT-00127
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- Battery Summary -->
+            <section class="metrics">
+
+                <div class="metric-card health-card">
+
+                    <div class="metric-top">
+                        <span>Battery Health</span>
+                        <span class="metric-icon">◒</span>
+                    </div>
+
+                    <div class="metric-value">
+                        <span id="soh">--</span>%
+                    </div>
+
+                    <p class="metric-description">
+                        State of Health
+                    </p>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+                        <span>State of Charge</span>
+                        <span class="metric-icon">◉</span>
+                    </div>
+
+                    <div class="metric-value">
+                        <span id="soc">--</span>%
+                    </div>
+
+                    <div class="progress">
+                        <div id="soc-bar"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+                        <span>Temperature</span>
+                        <span class="metric-icon">♨</span>
+                    </div>
+
+                    <div class="metric-value">
+                        <span id="temperature">--</span>
+                        <small>°C</small>
+                    </div>
+
+                    <p class="metric-description">
+                        Battery pack temperature
+                    </p>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+                        <span>Cycle Count</span>
+                        <span class="metric-icon">↻</span>
+                    </div>
+
+                    <div class="metric-value">
+                        <span id="cycles">--</span>
+                    </div>
+
+                    <p class="metric-description">
+                        Charge / discharge cycles
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Main Analytics -->
+            <section class="dashboard-grid">
+
+                <!-- Performance -->
+                <div class="panel performance-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="eyebrow">REAL-TIME TELEMETRY</p>
+                            <h3>Battery Performance</h3>
+                        </div>
+
+                        <div class="connection">
+                            <span></span>
+                            Streaming
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container">
+
+                        <div class="chart-placeholder">
+
+                            <div class="chart-line line-one"></div>
+                            <div class="chart-line line-two"></div>
+                            <div class="chart-line line-three"></div>
+
+                            <div class="chart-message">
+                                Live telemetry
+                                <small>Voltage & temperature monitoring</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="telemetry">
+
+                        <div>
+                            <span>Pack Voltage</span>
+                            <strong><span id="voltage">--</span> V</strong>
+                        </div>
+
+                        <div>
+                            <span>Current</span>
+                            <strong><span id="current">--</span> A</strong>
+                        </div>
+
+                        <div>
+                            <span>Temperature</span>
+                            <strong><span id="temp-bottom">--</span> °C</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Risk -->
+                <div class="panel risk-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="eyebrow">BATTERY INTELLIGENCE</p>
+                            <h3>Risk Assessment</h3>
+                        </div>
+
+                    </div>
+
+                    <div class="risk-display">
+
+                        <div id="risk-circle" class="risk-circle">
+                            <span id="risk-score">0</span>
+                            <small>RISK SCORE</small>
+                        </div>
+
+                        <div class="risk-info">
+
+                            <span id="risk-level" class="risk-badge">
+                                LOW
+                            </span>
+
+                            <h4 id="health-status">
+                                HEALTHY
+                            </h4>
+
+                            <p id="alert-message">
+                                No active battery alerts.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="risk-footer">
+                        <span>Automated battery analysis</span>
+                        <strong>ACTIVE</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Bottom Section -->
+            <section class="bottom-grid">
+
+                <!-- Alerts -->
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="eyebrow">MONITORING</p>
+                            <h3>Recent Alerts</h3>
+                        </div>
+
+                        <span class="alert-count" id="alert-count">
+                            0
+                        </span>
+
+                    </div>
+
+                    <div id="alerts-container" class="alerts-container">
+
+                        <div class="empty-alert">
+                            <div>✓</div>
+
+                            <div>
+                                <strong>No active alerts</strong>
+                                <p>Battery operating within normal parameters.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Passport -->
+                <div class="panel passport-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="eyebrow">DIGITAL IDENTITY</p>
+                            <h3>Battery Passport</h3>
+                        </div>
+
+                        <span class="passport-status">
+                            VERIFIED
+                        </span>
+
+                    </div>
+
+                    <div class="passport-content">
+
+                        <div class="passport-id">
+                            <span>BATTERY ID</span>
+                            <strong>VS-BAT-00127</strong>
+                        </div>
+
+                        <div class="passport-details">
+
+                            <div>
+                                <span>Chemistry</span>
+                                <strong>LFP</strong>
+                            </div>
+
+                            <div>
+                                <span>Manufacturer</span>
+                                <strong>VoltSure Demo Motors</strong>
+                            </div>
+
+                            <div>
+                                <span>Manufactured</span>
+                                <strong>15 Jan 2026</strong>
+                            </div>
+
+                            <div>
+                                <span>Lifecycle</span>
+                                <strong>IN SERVICE</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+            <!-- ================= ANALYTICS PAGE ================= -->
+
+<section id="analytics-page" class="hidden-page">
+
+    <div class="page-heading">
+        <div>
+            <p class="eyebrow">BATTERY DATA ANALYTICS</p>
+            <h2>Analytics</h2>
+            <p class="page-subtitle">
+                Historical battery performance and degradation insights.
+            </p>
+        </div>
+    </div>
+
+    <div class="analytics-summary">
+
+        <div class="analytics-card">
+            <span>Current SOH</span>
+            <strong id="analytics-soh">--%</strong>
+            <small>State of Health</small>
+        </div>
+
+        <div class="analytics-card">
+            <span>Degradation</span>
+            <strong id="analytics-degradation">--%</strong>
+            <small>Estimated battery degradation</small>
+        </div>
+
+        <div class="analytics-card">
+            <span>Data Points</span>
+            <strong id="analytics-points">0</strong>
+            <small>Historical readings</small>
+        </div>
+
+    </div>
+
+    <div class="panel analytics-panel">
+
+        <div class="panel-header">
+
+            <div>
+                <p class="eyebrow">HEALTH TREND</p>
+                <h3>Battery SOH History</h3>
+            </div>
+
+            <span class="analytics-status">
+                HISTORICAL DATA
+            </span>
+
+        </div>
+
+        <div class="analytics-chart">
+            <canvas id="soh-chart"></canvas>
+        </div>
+
+    </div>
+
+    <div class="analytics-two-column">
+
+        <div class="panel analytics-panel">
+
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow">THERMAL ANALYSIS</p>
+                    <h3>Temperature Trend</h3>
+                </div>
+            </div>
+
+            <div class="analytics-chart small-chart">
+                <canvas id="temperature-chart"></canvas>
+            </div>
+
+        </div>
+
+
+        <div class="panel analytics-panel">
+
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow">ENERGY ANALYSIS</p>
+                    <h3>SOC Trend</h3>
+                </div>
+            </div>
+
+            <div class="analytics-chart small-chart">
+                <canvas id="soc-chart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+            <!-- Footer -->
+            <footer>
+                <span>VoltSure Intelligence Engine v1.0</span>
+                <span id="last-updated">Waiting for data...</span>
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script src="app.js"></script>
+
+</body>
+</html>
